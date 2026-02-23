@@ -3,4 +3,17 @@
 
 // const { getUserById } = require('./js-foundation/04-arrow');
 
-require('./js-foundation/05-factory');
+const { getUUID, getAge } = require('./plugins');
+
+const { buildMakePerson } = require('./js-foundation/05-factory');
+
+const makePerson = buildMakePerson({ getUUID, getAge });
+
+const obj = {
+  name: 'John',
+  birthdate: '2005-10-13',
+};
+
+const john = makePerson(obj);
+
+console.log({ john });
