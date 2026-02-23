@@ -6,7 +6,7 @@ const { PUBLIC, TMP } = process.env;
 
 // console.log(PUBLIC, TMP);
 
-const characters = ['Flash', 'Superman', 'Batman'];
+const characters = ['Flash', 'Superman', 'Green Lantern','Batman'];
 
 const [, , batman] = characters;
 
