@@ -1,3 +1,19 @@
 {"level":"info","message":"Hola mundo","service":"app.js"}
 {"level":"info","message":"Hola mundo","service":"app.js"}
 {"level":"info","message":"Hola mundo","service":"app.js"}
+{"level":"info","message":"Hola mundo","service":"app.js"}
+{"level":"info","message":"Hola mundo","service":"app.js"}
+{"level":"info","message":"Hola mundo","service":"app.js"}
+{"level":"error","message":"error Esto es algo malo","service":"app.js"}
+{"level":"info","message":"Hola mundo","service":"app.js"}
+{"level":"error","message":"error Esto es algo malo","service":"app.js"}
+{"level":"info","message":"Hola mundo","service":"app.js"}
+{"level":"error","message":"error Esto es algo malo","service":"app.js"}
+{"level":"info","message":"Hola mundo","service":"app.js","timestamp":"2026-02-24T00:14:47.370Z"}
+{"level":"error","message":"error Esto es algo malo","service":"app.js","timestamp":"2026-02-24T00:14:47.374Z"}
+{"level":"info","message":"Hola mundo","service":"app.js","timestamp":"2026-02-24T00:17:05.986Z"}
+{"level":"error","message":"error Esto es algo malo","service":"app.js","timestamp":"2026-02-24T00:17:05.990Z"}
+{"level":"info","message":"Hola mundo","service":"app.js","timestamp":"23/2/2026, 09:17:31"}
+{"level":"error","message":"error Esto es algo malo","service":"app.js","timestamp":"23/2/2026, 09:17:31"}
+{"level":"info","message":"Hola mundo","service":"app.js","timestamp":"23/2/2026, 09:17:59"}
+{"level":"error","message":"error Esto es algo malo","service":"app.js","timestamp":"23/2/2026, 09:17:59"}
