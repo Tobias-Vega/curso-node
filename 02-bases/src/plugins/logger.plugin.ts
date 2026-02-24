@@ -1,4 +1,4 @@
-const winston = require('winston');
+import winston from 'winston'
 const { combine, timestamp, json } = winston.format;
 
 const timezoned = () => new Date().toLocaleString('es-AR', {
@@ -24,12 +24,12 @@ logger.add(
   }),
 );
 
-module.exports = function buildLogger(service) {
+export const buildLogger = (service: string) => {
   return {
-    log: (message) => {
+    log: (message: string) => {
       logger.log('info', { message, service });
     },
-    error: (message) => {
+    error: (message: string) => {
       logger.error('error', { 
         message, 
         service,
