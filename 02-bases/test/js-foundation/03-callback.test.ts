@@ -3,7 +3,7 @@ import { getUserById } from "../../src/js-foundation/03-callbacks";
 
 describe('js-foundation/03-callback.ts', () => {
 
-  test('getUserById shoul return an error if user does not exist', (done) => {
+  test('getUserById should return an error if user does not exist', (done) => {
 
     const id = 10;
 
@@ -15,5 +15,21 @@ describe('js-foundation/03-callback.ts', () => {
     });
 
   });
+
+  test('getUserById should return John Doe', (done) => {
+    const id = 1;
+    const johnDoe = {
+      id: 1,
+      name: 'John Doe'
+    }
+
+    getUserById(id, (err, user) => {
+      expect(err).toBeUndefined();
+      expect(user).toEqual(johnDoe);
+      
+      done();
+    });
+
+  })
 
 });
