@@ -32,6 +32,7 @@
     // "noPropertyAccessFromIndexSignature": true,
 
     // Recommended Options
+    "esModuleInterop": true,
     "strict": true,
     "verbatimModuleSyntax": false,
     "skipLibCheck": true,
