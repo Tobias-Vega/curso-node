@@ -1,4 +1,24 @@
+import fs from 'fs';
 
-const message: string = 'Hola mundo';
+let outputMessage = '';
 
-console.log(message);
+const base = 5;
+const headerMessage = 
+`------------------------------
+    Tabla del ${base}
+-----------------------------\n`
+;
+
+for(let i = 1; i <= 10; i++) {
+  outputMessage += `${base} x ${i} = ${base * i}\n`;
+}
+
+outputMessage = headerMessage + outputMessage;
+
+console.log(outputMessage);
+
+const outputPath = `outputs`;
+
+fs.mkdirSync(outputPath, { recursive: true });
+fs.writeFileSync(`${outputPath}/tabla-${base}.txt`, outputMessage);
+console.log('File created');
