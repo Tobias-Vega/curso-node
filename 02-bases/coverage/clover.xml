@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1772056010414" clover="3.2.0">
-  <project timestamp="1772056010414" name="All files">
-    <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1" elements="14" coveredelements="13" complexity="0" loc="11" ncloc="11" packages="1" files="1" classes="1"/>
+<coverage generated="1772067079476" clover="3.2.0">
+  <project timestamp="1772067079476" name="All files">
+    <metrics statements="16" coveredstatements="16" conditionals="3" coveredconditionals="2" methods="2" coveredmethods="2" elements="21" coveredelements="20" complexity="0" loc="16" ncloc="16" packages="1" files="2" classes="2"/>
     <file name="get-age.plugin.ts" path="C:\Users\Usuario\Desktop\cursos-de-programacion\fernando-herrera\practica\07-curso-node\02-bases\src\plugins\get-age.plugin.ts">
       <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
@@ -15,6 +15,14 @@
       <line num="9" count="3" type="stmt"/>
       <line num="10" count="3" type="stmt"/>
       <line num="11" count="3" type="stmt"/>
+    </file>
+    <file name="get-id.plugin.ts" path="C:\Users\Usuario\Desktop\cursos-de-programacion\fernando-herrera\practica\07-curso-node\02-bases\src\plugins\get-id.plugin.ts">
+      <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
