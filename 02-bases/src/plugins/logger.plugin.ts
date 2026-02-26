@@ -5,7 +5,7 @@ const timezoned = () => new Date().toLocaleString('es-AR', {
   timeZone: 'America/Argentina/Buenos_Aires',
 });
 
-const logger = winston.createLogger({
+export const logger = winston.createLogger({
   level: 'info',
   format: combine(
     timestamp({format: timezoned}),
