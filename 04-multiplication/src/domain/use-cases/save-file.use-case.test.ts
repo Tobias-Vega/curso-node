@@ -3,8 +3,20 @@ import fs from 'fs';
 
 describe('SaveFileUseCase', () => {
 
+  const customOptions = {
+    fileContent: 'custom content',
+    fileDestination: 'custom-outputs/file-destination',
+    fileName: 'custom-table-name',
+  }
+
+  const customFilePath = `${customOptions.fileDestination}/${customOptions.fileName}.txt`;
+
   afterEach(() => {
-    fs.rmSync('outputs', { recursive: true });
+    const outputlFolderExists = fs.existsSync('outputs')
+    if (outputlFolderExists) fs.rmSync('outputs', { recursive: true });
+
+    const customOutputFolderExists = fs.existsSync(customOptions.fileDestination);
+    if (customOutputFolderExists) fs.rmSync(customOptions.fileDestination, { recursive: true });
 
   });
 
@@ -24,6 +36,21 @@ describe('SaveFileUseCase', () => {
     expect(result).toBeTruthy();
     expect(fileExists).toBeTruthy();
     expect(fileContent).toBe(options.fileContent);
+
+  });
+
+  test('should save file with custom values', () => {
+
+    const saveFile = new SaveFile();
+
+
+    const result = saveFile.execute(customOptions);
+    const fileExists = fs.existsSync(customFilePath);
+    const fileContent = fs.readFileSync(customFilePath, { encoding: 'utf-8' });
+
+    expect(result).toBeTruthy();
+    expect(fileExists).toBeTruthy();
+    expect(fileContent).toBe(customOptions.fileContent);
 
   });
 
