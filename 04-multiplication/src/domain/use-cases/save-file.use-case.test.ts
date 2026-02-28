@@ -1,5 +1,5 @@
-import { SaveFile } from './save-file.use-case';
 import fs from 'fs';
+import { SaveFile } from './save-file.use-case';
 
 describe('SaveFileUseCase', () => {
 
@@ -11,12 +11,24 @@ describe('SaveFileUseCase', () => {
 
   const customFilePath = `${customOptions.fileDestination}/${customOptions.fileName}.txt`;
 
-  afterEach(() => {
-    const outputlFolderExists = fs.existsSync('outputs')
-    if (outputlFolderExists) fs.rmSync('outputs', { recursive: true });
+  beforeAll(() => {
+    if (!fs.existsSync('outputs')) {
+      fs.mkdirSync('outputs');
+    }
+  });
 
-    const customOutputFolderExists = fs.existsSync(customOptions.fileDestination);
-    if (customOutputFolderExists) fs.rmSync(customOptions.fileDestination, { recursive: true });
+  afterEach(() => {
+
+    const filesToDelete = [
+      'outputs/table.txt',
+      customFilePath
+    ];
+
+    filesToDelete.forEach(file => {
+      if (fs.existsSync(file)) {
+        fs.rmSync(file, { force: true });
+      }
+    });
 
   });
 
@@ -54,4 +66,29 @@ describe('SaveFileUseCase', () => {
 
   });
 
+  test('should return false if directory could not be created', () => {
+
+    const saveFile = new SaveFile();
+    const mkdirSpy = jest.spyOn(fs, 'mkdirSync').mockImplementation(() => { throw new Error('This is a custom error message from testing') });
+
+    const result = saveFile.execute(customOptions);
+
+    expect(result).toBeFalsy();
+
+    mkdirSpy.mockRestore();
+
+  });
+
+  test('should return false if file could not be created', () => {
+
+    const saveFile = new SaveFile();
+    const writeFileSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => { throw new Error('This is a custom writting error message') });
+
+    const result = saveFile.execute({ fileContent: 'hola' });
+
+    expect(result).toBeFalsy();
+
+    writeFileSpy.mockRestore();
+
+  })
 });
