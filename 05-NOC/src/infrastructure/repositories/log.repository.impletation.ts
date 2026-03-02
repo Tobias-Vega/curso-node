@@ -9,7 +9,7 @@ export class LogRepositoryImpl implements LogRepository {
     private logDataSource: LogDatasource
   ) {}
 
-  async saveLogs(log: LogEntity): Promise<void> {
+  async saveLog(log: LogEntity): Promise<void> {
     await this.logDataSource.saveLogs(log);
   }
 
