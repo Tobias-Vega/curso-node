@@ -42,10 +42,28 @@ export class FileSystemDatasource implements LogDatasource {
     } else {
       fs.appendFileSync(this.highLogsPath, logAsJson);
     }
-
   }
 
-  getLogs(serverityLevel: LogSeverityLevel): Promise<LogEntity[]> {
-    throw new Error('Method not implemented');
+  private getLogsFromFile = (path:string): LogEntity[] => {
+    const content = fs.readFileSync(path, 'utf-8');
+    const logs = content.split('\n').map(LogEntity.fromJson);
+
+    return logs;
+  }
+
+  async getLogs(serverityLevel: LogSeverityLevel): Promise<LogEntity[]> {
+    switch(serverityLevel) {
+      case LogSeverityLevel.low:
+        return this.getLogsFromFile(this.allLogsPath);
+
+      case LogSeverityLevel.medium:
+        return this.getLogsFromFile(this.mediumLogsPath);
+
+      case LogSeverityLevel.high:
+        return this.getLogsFromFile(this.highLogsPath);
+
+      default:
+        throw new Error(`${serverityLevel} not implemented`);
+    }
   }
 }
