@@ -12,13 +12,13 @@ export class Server {
 
     console.log('Server started...');
 
-    const emailService = new EmailService();
-    emailService.sendEmailWithFileSystemLogs('tobiasvega1210@gmail.com')
+    const emailService = new EmailService(fileSystemLogRepository);
+    emailService.sendEmailWithFileSystemLogs('tobiasvega1210@gmail.com');
 
     CronService.createJob(
       '*/5 * * * * *',
       () => {
-        const url = 'https:google.com';
+        const url = 'https://google.com';
         new CheckService(
           fileSystemLogRepository,
           () => console.log(`${url} is ok`),
