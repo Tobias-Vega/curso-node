@@ -3,11 +3,10 @@ import fs from 'fs';
 import { LogDatasource } from "../../domain/datasources/log.datasource";
 import { LogSeverityLevel, LogEntity } from "../../domain/entities/log.entity";
 
-
 export class FileSystemDatasource implements LogDatasource {
 
   private readonly logPath = 'logs/';
-  private readonly allLogsPath = 'logs/logs-low.log';
+  private readonly allLogsPath = 'logs/logs-all.log';
   private readonly mediumLogsPath = 'logs/logs-medium.log';
   private readonly highLogsPath = 'logs/logs-high.log';
 
@@ -27,11 +26,23 @@ export class FileSystemDatasource implements LogDatasource {
     ].forEach(path => {
       if (fs.existsSync(path)) return;
       fs.writeFileSync(path, '')
-    })
+    });
   }
 
-  saveLogs(log: LogEntity): Promise<void> {
-    throw new Error('Method not implemented');
+  async saveLogs(newLog: LogEntity): Promise<void> {
+
+    const logAsJson = `${JSON.stringify(newLog)}\n`
+
+    fs.appendFileSync(this.allLogsPath, logAsJson);
+
+    if (newLog.level === LogSeverityLevel.low) return;
+
+    if (newLog.level === LogSeverityLevel.medium) {
+      fs.appendFileSync(this.mediumLogsPath, logAsJson);
+    } else {
+      fs.appendFileSync(this.highLogsPath, logAsJson);
+    }
+
   }
 
   getLogs(serverityLevel: LogSeverityLevel): Promise<LogEntity[]> {
