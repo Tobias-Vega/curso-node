@@ -4,8 +4,12 @@ import { CronService } from "./cron/cron-service";
 import { FileSystemDatasource } from '../infrastructure/datasources/file-system.datasource';
 import { EmailService } from "./email/email.service";
 import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
+import { MongoLogDataSource } from "../infrastructure/datasources/mongo-log.datasource";
 
-const fileSystemLogRepository = new LogRepositoryImpl(new FileSystemDatasource()); 
+const logRepository = new LogRepositoryImpl(
+  // new FileSystemDatasource()
+  new MongoLogDataSource()
+); 
 const emailService = new EmailService()
 
 export class Server {
@@ -16,7 +20,7 @@ export class Server {
 
     new SendEmailLogs(
       emailService,
-      fileSystemLogRepository,
+      logRepository,
 
     ).execute(
       'tobiasvega1210@gmail.com'
@@ -28,9 +32,9 @@ export class Server {
     CronService.createJob(
       '*/5 * * * * *',
       () => {
-        const url = 'https://google.com';
+        const url = 'https://googfdfsdle.com';
         new CheckService(
-          fileSystemLogRepository,
+          logRepository,
           () => console.log(`${url} is ok`),
           (error) => console.log(error),
         ).execute(url);
