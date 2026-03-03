@@ -1,0 +1,24 @@
+import { model, Schema } from 'mongoose';
+
+const logSchema = new Schema({
+
+  message: {
+    type: String,
+    require: true,
+  },
+  origin: {
+    type: String,
+  },
+  level: {
+    type: String,
+    enum: ['low', 'medium', 'high'],
+    default: 'low',
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  }
+
+});
+
+export const logModel = model('Log', logSchema);
