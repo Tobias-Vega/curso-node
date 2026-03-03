@@ -1,6 +1,6 @@
 import { envs } from "./config/plugins/envs.plugin.js";
 import { MongoDatabase } from "./data/mongodb/index.js";
-import { prisma } from "./lib/prisma.js";
+import { Server } from "./presentation/server.js";
 
 (async () => {
   main();
@@ -13,6 +13,6 @@ async function main() {
     dbName: envs.MONGO_DB_NAME,
   });
 
-  // Server.start();
+  Server.start();
 
 }
