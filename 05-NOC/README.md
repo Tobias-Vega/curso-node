@@ -27,7 +27,13 @@ npm install
 docker compose up -d
 ```
 
-5. Iniciar el servidor
+5. Ejecutar las migraciones
+
+```
+npx prisma migrate dev
+```
+
+6. Iniciar el servidor
 
 ```
 npm run dev
