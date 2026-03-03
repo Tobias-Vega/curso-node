@@ -7,4 +7,3 @@ logs/
 mongo/
 postgres/
 /src/generated/prisma
-prisma/

@@ -1,6 +1,6 @@
-import { envs } from "./config/plugins/envs.plugin";
-import { LogModel, MongoDatabase } from "./data/mongodb";
-import { Server } from "./presentation/server";
+import { envs } from "./config/plugins/envs.plugin.js";
+import { MongoDatabase } from "./data/mongodb/index.js";
+import { prisma } from "./lib/prisma.js";
 
 (async () => {
   main();
@@ -13,6 +13,16 @@ async function main() {
     dbName: envs.MONGO_DB_NAME,
   });
 
-  Server.start();
+  const newLog = await prisma.logModel.create({
+    data: {
+      level: 'HIGH',
+      message: 'Test message',
+      origin: 'App.ts',
+    }
+  });
+
+  console.log(newLog);
+
+  // Server.start();
 
 }

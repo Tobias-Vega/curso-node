@@ -1,11 +1,11 @@
-import { CheckService } from "../domain/use-cases/checks/check-service";
-import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository.impletation";
-import { CronService } from "./cron/cron-service";
-import { FileSystemDatasource } from '../infrastructure/datasources/file-system.datasource';
-import { EmailService } from "./email/email.service";
-import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
-import { MongoLogDataSource } from "../infrastructure/datasources/mongo-log.datasource";
-import { LogSeverityLevel } from "../domain/entities/log.entity";
+import { CheckService } from "../domain/use-cases/checks/check-service.js";
+import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository.impletation.js";
+import { CronService } from "./cron/cron-service.js";
+import { FileSystemDatasource } from '../infrastructure/datasources/file-system.datasource.js';
+import { EmailService } from "./email/email.service.js";
+import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs.js";
+import { MongoLogDataSource } from "../infrastructure/datasources/mongo-log.datasource.js";
+import { LogSeverityLevel } from "../domain/entities/log.entity.js";
 
 const logRepository = new LogRepositoryImpl(
   // new FileSystemDatasource()
