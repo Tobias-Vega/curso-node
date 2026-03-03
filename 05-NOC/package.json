@@ -7,8 +7,9 @@
     "dev": "tsx watch src/app.ts",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/app.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "docker:test": "docker compose -f docker-compose.test.yml --env-file .env.test up -d",
+    "test": "npm run docker:test && jest",
+    "test:watch": "npm run docker:test && jest --watch",
     "test:coverage": "jest --coverage"
   },
   "keywords": [],
