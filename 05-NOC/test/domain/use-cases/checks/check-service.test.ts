@@ -1,5 +1,5 @@
-import { LogEntity } from '../../../src/domain/entities/log.entity';
-import { CheckService } from '../../../src/domain/use-cases/checks/check-service';
+import { LogEntity } from '../../../../src/domain/entities/log.entity';
+import { CheckService } from '../../../../src/domain/use-cases/checks/check-service';
 import {jest} from '@jest/globals';
 
 

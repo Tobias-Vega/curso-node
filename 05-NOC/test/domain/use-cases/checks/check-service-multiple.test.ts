@@ -1,7 +1,6 @@
-import { LogEntity } from '../../../src/domain/entities/log.entity';
-import { CheckService } from '../../../src/domain/use-cases/checks/check-service';
+import { LogEntity } from '../../../../src/domain/entities/log.entity';
 import { jest } from '@jest/globals';
-import { CheckServiceMultiple } from '../../../src/domain/use-cases/checks/check-service-multiple';
+import { CheckServiceMultiple } from '../../../../src/domain/use-cases/checks/check-service-multiple';
 
 
 describe('checkServiceUseCase', () => {
