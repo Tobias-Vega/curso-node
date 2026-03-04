@@ -1,0 +1,32 @@
+import { LogEntity, LogSeverityLevel } from '../../../src/domain/entities/log.entity';
+import { LogRepositoryImpl } from '../../../src/infrastructure/repositories/log.repository.impletation';
+
+
+describe('LogRepositoryImpl', () => {
+
+  const mockLogDatasouce = {
+    saveLog: jest.fn(),
+    getLogs: jest.fn(),
+  }
+
+  const logRepository = new LogRepositoryImpl(mockLogDatasouce as any);
+
+  beforeEach(()=> {
+    jest.clearAllMocks();
+  })
+
+  test('saveLog should call the datasource with arguments', async() => {
+
+    const log = { level: LogSeverityLevel.high, message: 'hola' } as LogEntity;
+    await logRepository.saveLog(log);
+    expect( mockLogDatasouce.saveLog ).toHaveBeenCalledWith( log );
+  });
+
+  test('getLogs should call the datasource with arguments', async() => {
+
+    const lowSeverity = LogSeverityLevel.low;
+
+    await logRepository.getLogs( lowSeverity );
+    expect( mockLogDatasouce.getLogs ).toHaveBeenCalledWith(lowSeverity)
+  });
+});
