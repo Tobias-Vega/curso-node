@@ -8,18 +8,20 @@
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/app.js",
     "docker:test": "docker compose -f docker-compose.test.yml --env-file .env.test up -d",
-    "test": "npm run docker:test && jest",
-    "test:watch": "npm run docker:test && jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "npm run docker:test && cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "npm run docker:test && cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@jest/globals": "^30.2.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.3.3",
     "@types/nodemailer": "^7.0.11",
+    "cross-env": "^10.1.0",
     "jest": "^30.2.0",
     "prisma": "^7.4.2",
     "rimraf": "^6.1.3",
