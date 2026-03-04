@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals'
-import { envs } from '../../src/config/plugins/envs.plugin';
+import { envs } from '../../../src/config/plugins/envs.plugin';
 
 describe('envs.plugins.ts', () => {
   test('should return env options', () => {
@@ -24,7 +24,7 @@ describe('envs.plugins.ts', () => {
     process.env.PORT = 'ABC';
 
     try {
-      await import('../../src/config/plugins/envs.plugin');
+      await import('../../../src/config/plugins/envs.plugin');
       expect(true).toBe(false);
     } catch (error) {
       expect(`${error}`).toContain('"PORT" should be a valid integer');
