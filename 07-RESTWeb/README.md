@@ -10,7 +10,13 @@
 npm install
 ```
 
-3. Levantar el servidor
+3. Ejecutar el comando para levantar Docker
+
+```
+docker compose up -d
+```
+
+4. Levantar el servidor
 
 ```
 npm run dev
