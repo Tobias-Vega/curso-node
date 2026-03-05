@@ -27,6 +27,16 @@ export class Server {
     //* Public Folder
     this.app.use(express.static(this.publicPath));
 
+    //* Routes
+    this.app.get('/api/todos', (req, res) => {
+      res.json([
+        { id: 1, text: 'Buy milk', createdAt: new Date() },
+        { id: 2, text: 'Buy bread', createdAt: null },
+        { id: 3, text: 'Buy butter', createdAt: new Date() },
+      ]);
+    });
+
+    //* SPA
     this.app.get(/.*/, (req, res) => {
       const indexPath = path.join(__dirname, '../../../', this.publicPath, 'index.html');
       res.sendFile(indexPath);
