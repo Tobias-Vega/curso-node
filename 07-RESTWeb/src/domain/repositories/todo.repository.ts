@@ -4,7 +4,7 @@ import { UpdateTodoDto } from '../dtos/todos/update-todo.dto.js';
 
 export abstract class TodoRepository {
 
-  abstract create(createTodo: CreateTodoDto): Promise<TodoEntity>;
+  abstract create(createTodoDto: CreateTodoDto): Promise<TodoEntity>;
   //todo paginación
   abstract getAll(): Promise<TodoEntity[]>;
 
