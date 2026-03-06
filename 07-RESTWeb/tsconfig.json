@@ -1,7 +1,7 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
-  "include": ["src"],
-  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     // File Layout
     "rootDir": "src",
@@ -13,7 +13,7 @@
     "target": "esnext",
     // For nodejs:
     // "lib": ["esnext"],
-    "types": ["node"],
+    "types": ["node", "jest"],
     // and npm install -D @types/node
 
     // Other Outputs

@@ -7,7 +7,10 @@
     "dev": "tsx watch src/app.ts",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/app.js",
-    "prisma:migrate:prod": "prisma migrate deploy"
+    "prisma:migrate:prod": "prisma migrate deploy",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +19,14 @@
   "devDependencies": {
     "@types/compression": "^1.8.1",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
     "@types/node": "^25.3.3",
     "@types/pg": "^8.18.0",
+    "jest": "^30.2.0",
     "prisma": "^7.4.2",
     "rimraf": "^6.1.3",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.6",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
@@ -27,6 +34,7 @@
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "compression": "^1.8.1",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.3.1",
     "env-var": "^7.5.0",
     "express": "^5.2.1",
