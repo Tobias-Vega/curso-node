@@ -3,6 +3,9 @@ dist/
 keys/
 
 .env
+.env.test
 
 postgres/
 /src/generated/prisma
+
+coverage/
