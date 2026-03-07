@@ -10,7 +10,7 @@ export class CreateTodoDto {
 
     const { text } = props;
 
-    if (!text) {
+    if (!text || text.length === 0) {
       return ['Text is required'];
     }
 
