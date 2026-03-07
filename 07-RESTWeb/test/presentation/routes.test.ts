@@ -143,21 +143,42 @@ describe('Todo route testing', () => {
       completedAt: '2025-01-03T00:00:00.000Z'
     });
   });
-  
+
   test('should return an updtated Todo only the text', async () => {
-  
+
     const todo = await prisma.todo.create({ data: todo1 });
-  
+
     const { body } = await request(testServer.app)
       .put(`/api/todos/${todo.id}`)
       .send({ text: 'Hola mundo Updated' })
       .expect(200);
-  
+
     expect(body).toEqual({
       id: expect.any(Number),
       text: 'Hola mundo Updated',
       completedAt: todo.completedAt
     });
   });
-});
 
+  test('should delete a Todo api/todos/:id', async () => {
+
+    const todo = await prisma.todo.create({ data: todo1 });
+
+    const { body } = await request(testServer.app)
+      .delete(`/api/todos/${todo.id}`)
+      .expect(200);
+
+    expect(body).toEqual({
+      id: expect.any(Number),
+      text: todo.text,
+      completedAt: null
+    });
+  });
+
+  test('should return 404 if Todo do not exist api/todos/:id', async () => {
+
+    const { body } = await request(testServer.app)
+      .delete(`/api/todos/999`)
+      .expect(400);
+  });
+});
