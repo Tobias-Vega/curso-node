@@ -98,4 +98,33 @@ describe('Todo route testing', () => {
 
     expect(body).toEqual({ error: 'Text is required' });
   });
+
+  test('should return an updated Todo api/todos/:id', async () => {
+
+    const todo = await prisma.todo.create({ data: todo1 });
+
+    const { body } = await request(testServer.app)
+      .put(`/api/todos/${todo.id}`)
+      .send({ text: 'Hola mundo Updated', completedAt: '2025-01-03' })
+      .expect(200);
+
+    expect(body).toEqual({
+      id: expect.any(Number),
+      text: 'Hola mundo Updated',
+      completedAt: '2025-01-03T00:00:00.000Z'
+    });
+  });
+
+  test('should return 404 if Todo not found', async () => {
+
+  });
+
+  test('should return an updtated Todo only the date', async() => {
+
+  });
+
+
+  test('should return an updtated Todo only the text', async() => {
+
+  });
 });
