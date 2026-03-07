@@ -59,9 +59,11 @@ describe('Todo route testing', () => {
 
     const { body } = await request(testServer.app)
       .get(`/api/todos/999`)
-      .expect(400)
+      .expect(404)
 
-    expect(body).toEqual(`Todo with id ${todoId} not found`);
+    expect(body).toEqual({
+      error: `Todo with id ${todoId} not found`
+    });
   });
 
   test('should return a new Todo api/todos', async () => {
@@ -122,9 +124,11 @@ describe('Todo route testing', () => {
     const { body } = await request(testServer.app)
       .put(`/api/todos/${todoId}`)
       .send({ text: 'Hola mundo Updated', completedAt: '2025-01-03' })
-      .expect(400);
+      .expect(404);
 
-    expect(body).toEqual(`Todo with id ${todoId} not found`);
+    expect(body).toEqual({
+      error: `Todo with id ${todoId} not found`
+    });
 
   });
 
@@ -179,6 +183,10 @@ describe('Todo route testing', () => {
 
     const { body } = await request(testServer.app)
       .delete(`/api/todos/999`)
-      .expect(400);
+      .expect(404);
+
+    expect(body).toEqual({
+      error: 'Todo with id 999 not found'
+    });
   });
 });
