@@ -29,8 +29,12 @@ export class AuthService {
 
       const { password, ...userEntity } = UserEntity.fromObject(user);
 
+      const token = await JwtAdapter.generateToken({ id: user.id});
+      if (!token) throw CustomError.internalServer('Error while creating JWT');
+
       return {
-        user: userEntity
+        user: userEntity,
+        token
       };
 
     } catch (error) {
@@ -66,7 +70,7 @@ export class AuthService {
 
     if (!token) throw CustomError.internalServer('Erro getting token');
 
-    const link = `${envs.WEBSERVICE_URL}/auth/validate-email${token}`;
+    const link = `${envs.WEBSERVICE_URL}/auth/validate-email/${token}`;
     const html = `
       <h1>Validate your email</h1>
       <p>Link on the following link to validate your email</p>
