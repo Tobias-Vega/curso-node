@@ -9,7 +9,7 @@ export class AuthService {
   // DI
   constructor(
     private readonly emailService: EmailService,
-  ) {}
+  ) { }
 
   public async registerUser(registerUserDto: RegisterUserDto) {
 
@@ -29,7 +29,7 @@ export class AuthService {
 
       const { password, ...userEntity } = UserEntity.fromObject(user);
 
-      const token = await JwtAdapter.generateToken({ id: user.id});
+      const token = await JwtAdapter.generateToken({ id: user.id });
       if (!token) throw CustomError.internalServer('Error while creating JWT');
 
       return {
@@ -66,11 +66,11 @@ export class AuthService {
 
   private async sendEmailValidationLink(email: string) {
 
-    const token = await JwtAdapter.generateToken({email});
+    const token = await JwtAdapter.generateToken({ email });
 
     if (!token) throw CustomError.internalServer('Erro getting token');
 
-    const link = `${envs.WEBSERVICE_URL}/auth/validate-email/${token}`;
+    const link = `${envs.WEBSERVICE_URL}/api/auth/validate-email/${token}`;
     const html = `
       <h1>Validate your email</h1>
       <p>Link on the following link to validate your email</p>
@@ -85,6 +85,28 @@ export class AuthService {
 
     const isSent = await this.emailService.sendEmail(options);
 
-    if(!isSent) throw CustomError.internalServer('Error sending email');
+    if (!isSent) throw CustomError.internalServer('Error sending email');
+  }
+
+  public async validateEmail(token: string) {
+
+    const payload = await JwtAdapter.validateToken(token);
+
+    if (!payload) throw CustomError.unauthorized('Invalid token');
+
+    const { email } = payload as { email: string };
+
+    if (!email) throw CustomError.internalServer('Email not in token');
+
+    const user = await UserModel.findOne({ email });
+
+    if (!user) throw CustomError.internalServer('Email not exists');
+
+    user.emailValidated = true;
+
+    await user.save();
+
+    return true;
+
   }
 }
