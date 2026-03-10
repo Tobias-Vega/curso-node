@@ -17,7 +17,7 @@ export class CategoryController {
     return res.status(500).json({ error: 'Internal server error' });
   }
 
-  createCategory = async(req: Request, res: Response) => {
+  createCategory = (req: Request, res: Response) => {
 
     const [error, createCategoryDto] = CreateCategoryDto.create(req.body);
 
@@ -29,8 +29,12 @@ export class CategoryController {
 
   }
 
-  getCategories = async (req: Request, res: Response) => {
-    res.json('Get Categories');
+  getCategories = (req: Request, res: Response) => {
+    
+    this.categoryService.getCategories()
+      .then(categories => res.status(200).json({ categories }))
+      .catch(error => this.handleError(error, res));
+
   }
 
 }
