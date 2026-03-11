@@ -15,11 +15,9 @@ export class CreateProductDto {
 
     const { name, available, price, description, user, category } = object;
 
-    let availableBoolean;
-
     if (!name) return ['Missing name'];
-    if (!user) return ['Missing name'];
-    if (!category) return ['Missing name'];
+    if (!user) return ['Missing user'];
+    if (!category) return ['Missing category'];
 
     return [undefined, new CreateProductDto(name, !!available, price, description, user, category)];
 
