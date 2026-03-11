@@ -35,4 +35,7 @@ const productSchema = new Schema({
   }
 });
 
+productSchema.set('toJSON', {  virtuals: true,  transform: (doc, { _id, __v, ...rest }) => ({ ...rest })});
+
+
 export const ProductModel = model('Product', productSchema);

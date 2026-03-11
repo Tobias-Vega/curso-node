@@ -20,6 +20,8 @@ const categorySchema = new Schema({
     required: true
   }
 
-})
+});
+
+categorySchema.set('toJSON', {  virtuals: true,  transform: (doc, { _id, __v, ...rest }) => ({ ...rest })});
 
 export const CategoryModel = model('Category', categorySchema);

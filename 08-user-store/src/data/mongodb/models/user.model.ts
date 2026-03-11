@@ -29,4 +29,9 @@ const userSchema = new Schema({
   }
 });
 
+userSchema.set('toJSON', {
+  virtuals: true,
+  transform: (doc, { _id, __v, password, ...rest }) => ({...rest})
+})
+
 export const UserModel = model('User', userSchema);
