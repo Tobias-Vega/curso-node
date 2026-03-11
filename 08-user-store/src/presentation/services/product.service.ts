@@ -13,14 +13,14 @@ export class ProductService {
 
     try {
 
-      const product = new ProductModel({ createProductDto });
+      const product = new ProductModel(createProductDto);
 
       await product.save();
 
       return product;
 
     } catch (error) {
-      throw CustomError.internalServer('Unexpected error');
+      throw CustomError.internalServer(`error: ${error}`);
     }
   }
 
