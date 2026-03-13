@@ -27,16 +27,11 @@ export class FileUploadController {
       return res.status(400).json({ error: `Invalid type: ${type}, valid ones ${validTypes}` });
     }
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).json({ error: 'No files were selected' });
-    }
-
-    const file = req.files.file as UploadedFile;
+    const file = req.body.files.at(0) as UploadedFile;
 
     this.fileUploadService.uploadSingle(file, `uploads/${type}`)
       .then(uploaded => res.status(201).json(uploaded))
       .catch(error => this.handleError(error, res));
-
   }
 
   uploadMultipleFiles = async (req: Request, res: Response) => {
