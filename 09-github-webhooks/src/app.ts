@@ -13,6 +13,8 @@ function main() {
 
   const app = express();
 
+  app.use(express.json());
+
   const controller = new GitHubController();
 
   app.post('/api/github', controller.webhookHandler);
