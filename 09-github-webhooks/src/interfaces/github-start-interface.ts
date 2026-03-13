@@ -1,4 +1,4 @@
-export interface GitHubStartPayload {
+export interface GitHubStarPayload {
   action:     string;
   starred_at: Date;
   repository: Repository;
