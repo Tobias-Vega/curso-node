@@ -9,7 +9,8 @@ wss.on('connection', function connection(ws) {
   ws.on('error', console.error);
 
   ws.on('message', function message(data) {
-    console.log('received: %s', data);
+    console.log('Desde el cliente:', data);
+    // Todo: enviar la data al cliente de regreso
   });
 
   ws.send('Hola desde el servidor');
