@@ -4,7 +4,7 @@ import { Ticket } from "../../domain/interfaces/ticket";
 
 export class TicketService {
 
-  public readonly _tickets: Ticket[] = [
+  public readonly tickets: Ticket[] = [
     { id: UuidAdapter.v4(), number: 1, createdAt: new Date(), done: false },
     { id: UuidAdapter.v4(), number: 2, createdAt: new Date(), done: false },
     { id: UuidAdapter.v4(), number: 3, createdAt: new Date(), done: false },
@@ -13,24 +13,34 @@ export class TicketService {
     { id: UuidAdapter.v4(), number: 6, createdAt: new Date(), done: false },
   ];
 
+  private readonly workingOnTickets: Ticket[] = [];
+
+
+
   public get pendingTickets(): Ticket[] {
-    return this._tickets.filter(ticket => !ticket.handleAtDesk);
+    return this.tickets.filter(ticket => !ticket.handleAtDesk);
   }
 
-  public lastTicketNumber(): number {
-    return this._tickets.length > 0 ? this._tickets.at(-1)!.number : 0;
+  public get lastWorkingOnTickets(): Ticket[] {
+
+    return this.workingOnTickets.splice(0,4);
+
+  }
+
+  public get lastTicketNumber(): number {
+    return this.tickets.length > 0 ? this.tickets.at(-1)!.number : 0;
   }
 
   public createTicket() {
 
     const ticket: Ticket = {
       id: UuidAdapter.v4(),
-      number: this.lastTicketNumber() + 1,
+      number: this.lastTicketNumber + 1,
       createdAt: new Date(),
       done: false,
     }
 
-    this._tickets.push(ticket);
+    this.tickets.push(ticket);
     //TODO: WS
     return ticket;
 
@@ -38,11 +48,13 @@ export class TicketService {
 
   public drawTicket(desk:string) {
 
-    const ticket = this._tickets.find(ticket => !ticket.handleAtDesk);
+    const ticket = this.tickets.find(ticket => !ticket.handleAtDesk);
     if (!ticket) return { status: 'error', message: 'No hay tickets pendientes' };
 
     ticket.handleAtDesk = desk;
     ticket.handleAt = new Date();
+
+    this.workingOnTickets.unshift({...ticket});
 
     //TODO WS
 
@@ -51,11 +63,11 @@ export class TicketService {
   }
 
   public onFinishTicket(id: string) {
-    const ticket = this._tickets.find(ticket => ticket.id === id);
+    const ticket = this.tickets.find(ticket => ticket.id === id);
 
     if (!ticket) return { status: 'error', message: 'Ticket no encontrado' };
 
-    this._tickets.map(ticket => {
+    this.tickets.map(ticket => {
 
       if (ticket.id === id) {
         ticket.done = true;
