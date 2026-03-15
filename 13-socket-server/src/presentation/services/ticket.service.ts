@@ -48,7 +48,7 @@ export class TicketService {
     }
 
     this.tickets.push(ticket);
-    this.onTicketNumberChange();
+    this.onTicketNumberChanged();
     return ticket;
 
   }
@@ -63,7 +63,7 @@ export class TicketService {
 
     this.workingOnTickets.unshift({...ticket});
 
-    //TODO WS
+    this.onTicketNumberChanged();
 
     return { status: 'ok', ticket }
 
@@ -86,7 +86,7 @@ export class TicketService {
     return { status: 'ok' };
   }
 
-  private onTicketNumberChange() {
+  private onTicketNumberChanged() {
 
     this.wssService.sendMessage('on-ticket-count-changed', this.pendingTickets.length);
 
